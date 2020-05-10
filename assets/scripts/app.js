@@ -1,6 +1,6 @@
 const ATTACK_VALUE = 20;
 const STRONG_ATTACK_VALUE = 30;
-const MONSTER_ATTACK_VALUE = 30;
+const MONSTER_ATTACK_VALUE = 15;
 const HEAL_VALUE = 20;
 
 const MODE_ATTACK = "ATTACK"; // MODE_ATTACK = 0
@@ -20,13 +20,20 @@ function getMaxLifeValues() {
   const enteredValue = prompt("Maximum life for you and the monster.", "100");
 
   const parsedValue = parseInt(enteredValue);
-  if (isNaN(parsedValue || parsedValue <= 0)) {
+  if (isNaN(parsedValue) || parsedValue <= 0) {
     throw { message: "Invalid user input, not a number!" };
   }
+  return parsedValue;
 }
 
-if (isNaN(chosenMaxLife) || chosenMaxLife <= 0) {
+let chosenMaxLife;
+
+try {
+  chosenMaxLife = getMaxLifeValues();
+} catch (error) {
+  console.log(error);
   chosenMaxLife = 100;
+  alert('You entered something wrong, default value of 100 was used.')
 }
 
 let currentMonsterHealth = chosenMaxLife;
